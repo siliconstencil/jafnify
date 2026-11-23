@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The one primary action's fill; the text colour is jafnify_primary_on. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="@dimen/jafnify_radius_sm" />
+    <solid android:color="@color/jafnify_primary" />
+</shape>

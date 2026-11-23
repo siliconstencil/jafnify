@@ -1,0 +1,79 @@
+# Jafnify palette. The single source of truth for every colour in the app.
+#
+# Fixed palette, no dynamic colour.
+# The core build script reads this file and generates the Rust tokens; the
+# jafnify-tokens binary writes the Android resources from the same values.
+
+[light]
+# The window behind the card.
+bg = "#F4F5F6"
+# The card itself.
+surface = "#FFFFFF"
+# Body text.
+fg = "#17191C"
+# Secondary text.
+muted = "#5F656D"
+# Hairlines and card borders.
+line = "#DDE0E4"
+# A filled button and the text on it.
+primary = "#1F2328"
+primary_on = "#FFFFFF"
+# The mark and small labels only, never a button or a status.
+accent = "#B0263A"
+# States: ok, wait, err. The idle state is the muted colour.
+ok = "#1A6E3B"
+# The amber indicator: icons only. It does not reach 4.5:1 in light.
+wait = "#B26A00"
+# The amber used for a label. Safe as body text in both themes.
+wait_text = "#8A5200"
+err = "#B3261E"
+
+[dark]
+bg = "#0E0F11"
+surface = "#17191C"
+fg = "#E6E8EB"
+muted = "#9AA1AA"
+line = "#2A2E33"
+primary = "#E6E8EB"
+primary_on = "#15171A"
+accent = "#FF5C6C"
+ok = "#6FD99A"
+wait = "#F2B35B"
+# The dark amber already clears the body-text ratio, so a label reuses it.
+wait_text = "#F2B35B"
+err = "#FF8A80"
+
+# The one spacing, type, radius and elevation scale for every platform.
+# Android reads these as `values/dimens.xml`; the Linux GUI reads them through
+# `linux/src/theme.rs`; a future port reads the same names.
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[type]
+caption = 11
+body = 14
+body_large = 17
+title = 22
+display = 34
+
+[line_height]
+caption = 16
+body = 20
+body_large = 24
+title = 28
+display = 40
+
+[radius]
+sm = 8
+md = 12
+lg = 16
+
+[elevation]
+none = 0
+low = 1
+high = 2

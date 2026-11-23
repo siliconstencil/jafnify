@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Light Material theme for the default (non-night) configuration.
+         No framework ActionBar: every screen draws the shared in-app header. -->
+    <style name="JafnifyTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:colorBackground">@color/jafnify_bg</item>
+        <item name="android:textColorPrimary">@color/jafnify_fg</item>
+        <item name="android:textColorSecondary">@color/jafnify_muted</item>
+        <item name="android:colorAccent">@color/jafnify_primary</item>
+        <!-- Explicit control colors: the Material parent (not DeviceDefault)
+             keeps OEM themes such as One UI from tinting checked radios and
+             off switches into the background. -->
+        <item name="android:colorControlActivated">@color/jafnify_primary</item>
+        <item name="android:colorControlNormal">@color/jafnify_muted</item>
+        <!-- Dark status and navigation bar icons over the light background. -->
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+</resources>

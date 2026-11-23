@@ -1,0 +1,45 @@
+[package]
+name = "jafnify-core"
+version = "0.1.4"
+edition = "2021"
+description = "Jafnify peer-to-peer tunnel core: pairing, discovery, config, state, orchestration"
+license = "MIT"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+hmac = "0.12"
+sha2 = "0.10"
+rand = "0.8"
+x25519-dalek = { version = "2.0.1", features = ["static_secrets"] }
+spake2 = "0.4.0"
+base64 = "0.22"
+thiserror = "1.0"
+socket2 = { version = "0.5", features = ["all"] }
+libc = "0.2"
+
+[dev-dependencies]
+tempfile = "3"
+
+# W1: the Windows seam. Only the Win32 modules the core uses are enabled; the
+# crate and its windows-targets dependency are already in the lock offline.
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.52", features = [
+    "Win32_Foundation",
+    "Win32_Globalization",
+    "Win32_NetworkManagement_IpHelper",
+    "Win32_NetworkManagement_Ndis",
+    "Win32_NetworkManagement_WiFi",
+    "Win32_Networking_WinSock",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_Storage_FileSystem",
+    "Win32_System_IO",
+    "Win32_System_Threading",
+    "Win32_System_Time",
+] }
+
+# The palette is generated from design/tokens.toml at build time. The same
+# toml version is already a normal dependency, so no new package is pulled in.
+[build-dependencies]
+toml = "0.8"

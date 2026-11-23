@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- View tags used by SignalPulse; ids exist only for stable tag slots. -->
+    <item name="tag_arc_anim" type="id" />
+    <item name="tag_arc_listener" type="id" />
+</resources>

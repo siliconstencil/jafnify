@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The signal arcs of the J-Signal mark. Same path data as assets/icon/jafnify.svg. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="28dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M50,16 A10,10 0 0,0 47.07,8.93"
+        android:strokeColor="@color/jafnify_accent"
+        android:strokeLineCap="round"
+        android:strokeWidth="5.5" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M57,16 A17,17 0 0,0 52.02,3.98"
+        android:strokeColor="@color/jafnify_accent"
+        android:strokeLineCap="round"
+        android:strokeWidth="5.5" />
+</vector>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/jafnify_spacing_md">
+
+    <include
+        layout="@layout/header_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/jafnify_spacing_xl">
+
+            <!-- Inline warning banner; the action is a quiet text link. -->
+            <LinearLayout
+                android:id="@+id/notifBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/banner_bg"
+                android:gravity="top"
+                android:orientation="horizontal"
+                android:padding="@dimen/jafnify_spacing_md"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/jafnify_spacing_xs"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_state_exclamation"
+                    android:tint="@color/jafnify_wait" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/jafnify_spacing_sm"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tNotifNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notif_off_note"
+                        android:textColor="@color/jafnify_wait_text"
+                        android:textSize="@dimen/jafnify_type_body" />
+
+                    <TextView
+                        android:id="@+id/bNotifSettings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/jafnify_spacing_xs"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:minHeight="48dp"
+                        android:minWidth="48dp"
+                        android:paddingEnd="@dimen/jafnify_spacing_xl"
+                        android:text="@string/notif_open_settings"
+                        android:textColor="@color/jafnify_primary"
+                        android:textSize="@dimen/jafnify_type_body"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_sm"
+                android:text="@string/settings_section_sharing"
+                android:textSize="@dimen/jafnify_type_caption"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_xs"
+                android:text="@string/settings_sharing_hint"
+                android:textColor="@color/jafnify_muted"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <Switch
+                android:id="@+id/swStartOnOpen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_md"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:text="@string/start_on_open"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <TextView
+                android:id="@+id/tStartOnOpenHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_xs"
+                android:text="@string/start_on_open_help"
+                android:textColor="@color/jafnify_muted"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <TextView
+                android:id="@+id/tNicknameLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_lg"
+                android:text="@string/nickname_label"
+                android:textColor="@color/jafnify_fg"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <EditText
+                android:id="@+id/etNickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_xs"
+                android:hint="@string/nickname_hint"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLength="32"
+                android:minHeight="48dp"
+                android:textColor="@color/jafnify_fg"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <TextView
+                android:id="@+id/tNicknameHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_xs"
+                android:text="@string/nickname_help"
+                android:textColor="@color/jafnify_muted"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <Button
+                android:id="@+id/bHomeLayout"
+                style="@style/JafnifyTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_md"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:text="@string/home_layout_action" />
+
+            <LinearLayout
+                android:id="@+id/flagSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_xl"
+                android:text="@string/settings_section_appearance"
+                android:textSize="@dimen/jafnify_type_caption"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/themeGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_sm"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/themeSystem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/theme_system"
+                    android:textSize="@dimen/jafnify_type_body" />
+
+                <RadioButton
+                    android:id="@+id/themeDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/theme_dark"
+                    android:textSize="@dimen/jafnify_type_body" />
+
+                <RadioButton
+                    android:id="@+id/themeLight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/theme_light"
+                    android:textSize="@dimen/jafnify_type_body" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/flagGroups"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

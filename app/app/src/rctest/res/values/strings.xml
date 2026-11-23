@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Test install name: tells the side-by-side test app from the product. -->
+<resources>
+    <string name="app_name">Jafnify Test</string>
+    <string name="wordmark">Jafnify Test</string>
+</resources>

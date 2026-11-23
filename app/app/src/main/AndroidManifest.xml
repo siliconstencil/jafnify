@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- connectedDevice needs its own permission on API 34+; the type's
+         runtime prerequisite is CHANGE_WIFI_MULTICAST_STATE below, which this
+         app already holds for its discovery socket. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <!-- The system sends WIFI_AP_STATE_CHANGED only to receivers that hold
+         this normal (install-time) permission. -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <!-- The hotspot alert's tap target: the tether screen, then the wireless
+         settings. Querying them needs package visibility on Android 11+. -->
+    <queries>
+        <intent>
+            <action android:name="android.settings.TETHER_SETTINGS"/>
+        </intent>
+        <intent>
+            <action android:name="android.settings.WIRELESS_SETTINGS"/>
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/JafnifyTheme"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DevicesActivity"
+            android:exported="false"
+            android:label="@string/devices_title" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings_title" />
+        <activity
+            android:name=".HomeLayoutActivity"
+            android:exported="false"
+            android:label="@string/home_layout_title" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="false"
+            android:label="@string/statistics_title" />
+        <activity
+            android:name=".BestSpotActivity"
+            android:exported="false"
+            android:label="@string/best_spot_title" />
+        <activity
+            android:name=".DevicePanelActivity"
+            android:exported="false"
+            android:label="@string/device_panel_title" />
+        <activity
+            android:name=".DiagnosticsActivity"
+            android:exported="false"
+            android:label="@string/diagnostics_title" />
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:label="@string/about_title" />
+        <activity
+            android:name=".NoticesActivity"
+            android:exported="false"
+            android:label="@string/third_party_notices_title" />
+        <!-- Foreground service owning the running sharer. The documented fit
+             is connectedDevice: it relays the phone's internet over a network
+             connection to a paired device, has no duration limit, and avoids
+             the Android 15 dataSync 6 h cap. Never change this to dataSync;
+             a contract test guards it. -->
+        <service
+            android:name=".SharerService"
+            android:description="@string/sharer_service_desc"
+            android:foregroundServiceType="connectedDevice"
+            android:exported="false" />
+        <!-- After the first unlock, start the stored pair when the user opted
+             in. No direct-boot receiver: the app must not start before the
+             user has unlocked the phone. -->
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <!-- An app update kills the sharing process without a clean teardown.
+             The system sends this broadcast to the app itself, and it is a
+             documented exemption from the background FGS-start ban, so the
+             sharer can come back without the user opening the app. -->
+        <receiver
+            android:name=".UpdateReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <!-- Plain ContentProvider (no AndroidX/FileProvider) serving the
+             exported diagnostic zip for a one-shot read grant. It is not
+             exported: only the exact URI the chooser receives is readable. -->
+        <provider
+            android:name=".DiagProvider"
+            android:authorities="${applicationId}.diag"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+    </application>
+</manifest>

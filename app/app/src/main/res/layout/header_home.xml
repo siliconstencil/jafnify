@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home brand header: the J-Signal mark plus the wordmark, replacing the
+     plain framework action bar title. The two mark layers are separate so the
+     arcs can carry the session state. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/jafnify_spacing_xs">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/headJ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_brand_j_28" />
+
+        <ImageView
+            android:id="@+id/headArcs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_brand_arcs_28" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tWordmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/jafnify_spacing_sm"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.02"
+        android:text="@string/wordmark"
+        android:textColor="@color/jafnify_fg"
+        android:textSize="@dimen/jafnify_type_title" />
+</LinearLayout>

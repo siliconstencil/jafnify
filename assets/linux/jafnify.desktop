@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Jafnify
+GenericName=P2P internet tunnel
+Comment=Use the phone's internet through an encrypted tunnel
+Exec=/usr/local/bin/jafnify-gui
+Icon=jafnify
+Terminal=false
+Categories=Network;VPN;
+StartupWMClass=jafnify

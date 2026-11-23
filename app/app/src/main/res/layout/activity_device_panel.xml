@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/jafnify_spacing_md">
+
+    <include
+        layout="@layout/header_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/jafnify_spacing_xl">
+
+            <TextView
+                android:id="@+id/panelLines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_sm"
+                android:lineSpacingExtra="@dimen/jafnify_spacing_xs"
+                android:textSize="@dimen/jafnify_type_body"
+                android:textIsSelectable="true" />
+
+            <Button
+                android:id="@+id/bBatteryHelp"
+                style="@style/JafnifyTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_lg"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:text="@string/panel_battery_help" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

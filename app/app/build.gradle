@@ -1,0 +1,159 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.siliconstencil.jafnify'
+    compileSdk 35
+    ndkVersion "26.1.10909125"
+
+    defaultConfig {
+        applicationId "com.siliconstencil.jafnify"
+        minSdk 21
+        targetSdk 35
+        versionCode 7
+        versionName "0.1.4"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        // Side-by-side test install: its own package and name, so an existing
+        // install and its pairing stay untouched. Debug-signed, never shipped.
+        rctest {
+            initWith debug
+            applicationIdSuffix ".test"
+            versionNameSuffix "-test"
+            matchingFallbacks = ['debug']
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // ASCII-only repository: no en/em dash or ellipsis characters.
+    lint {
+        disable 'TypographyDashes', 'TypographyEllipsis'
+        abortOnError true
+        warningsAsErrors true
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
+apply plugin: 'org.mozilla.rust-android-gradle.rust-android'
+
+cargo {
+    module  = "../wgserv"
+    libname = "wgserv"
+    // targets = ["arm", "arm64", "x86", "x86_64"]
+    targets = ["arm64"]
+    apiLevel = 21
+    profile = "release"
+    // Give the Android lib a GNU build-id (the default link has none) so the
+    // APK guard below can tell WHICH build of libwgserv.so it holds. Env var is
+    // target-specific: host builds and `cargo test` are unaffected.
+    // Panic messages embed source paths: map the build machine's directories
+    // to neutral names so no local path or user name ships in the APK.
+    exec = { spec, toolchain ->
+        def cargoHome = System.getenv('CARGO_HOME') ?: "${System.getProperty('user.home')}/.cargo"
+        def repoRoot = rootProject.projectDir.parentFile.canonicalPath
+        spec.environment('CARGO_TARGET_AARCH64_LINUX_ANDROID_RUSTFLAGS',
+                "-C link-arg=-Wl,--build-id=sha1 --remap-path-prefix=${cargoHome}=/cargo --remap-path-prefix=${repoRoot}=/jafnify")
+    }
+}
+
+// Where the plugin leaves the freshly built library.
+def rustLib = file("$buildDir/rustJniLibs/android/arm64-v8a/libwgserv.so")
+
+// GNU build-id (hex) of an ELF64 file, read from its PT_NOTE program headers
+// (they survive strip, unlike a section-name lookup on a stripped file). Returns
+// null if the file has none.
+def elfBuildId = { byte[] bytes ->
+    def b = java.nio.ByteBuffer.wrap(bytes).order(java.nio.ByteOrder.LITTLE_ENDIAN)
+    if (bytes.length < 64 || b.getInt(0) != 0x464c457f || bytes[4] != 2) {
+        throw new GradleException("not an ELF64 little-endian file")
+    }
+    long phoff = b.getLong(0x20)
+    int phentsize = b.getShort(0x36) & 0xffff
+    int phnum = b.getShort(0x38) & 0xffff
+    for (int i = 0; i < phnum; i++) {
+        int ph = (int) (phoff + (long) i * phentsize)
+        if (b.getInt(ph) != 4) continue // PT_NOTE
+        int pos = (int) b.getLong(ph + 8)
+        int end = pos + (int) b.getLong(ph + 32)
+        while (pos + 12 <= end) {
+            int namesz = b.getInt(pos)
+            int descsz = b.getInt(pos + 4)
+            int type = b.getInt(pos + 8)
+            int nameAt = pos + 12
+            int descAt = nameAt + ((namesz + 3) & ~3)
+            if (type == 3 && namesz == 4 && bytes[nameAt] == (byte) 'G') { // NT_GNU_BUILD_ID
+                return (0..<descsz).collect { String.format('%02x', bytes[descAt + it] & 0xff) }.join()
+            }
+            pos = descAt + ((descsz + 3) & ~3)
+        }
+    }
+    return null
+}
+
+// Plain assembleDebug/assembleRelease must always rebuild the Rust library;
+// the plugin does not hook cargoBuild into the Android build by itself.
+tasks.whenTaskAdded { task ->
+    if (task.name == 'mergeDebugJniLibFolders' || task.name == 'mergeReleaseJniLibFolders'
+            || task.name == 'mergeRctestJniLibFolders') {
+        task.dependsOn 'cargoBuild'
+        // The merge must see the Rust output as a real input: otherwise it can
+        // stay UP-TO-DATE after cargo rebuilt the .so and the APK ships the old one.
+        task.inputs.files(fileTree("$buildDir/rustJniLibs/android"))
+                .withPropertyName('rustJniLibs')
+                .withPathSensitivity(PathSensitivity.RELATIVE)
+    }
+    // Fail the build if the APK does not hold the library cargo just built.
+    if (task.name == 'packageDebug' || task.name == 'packageRelease' || task.name == 'packageRctest') {
+        def packageTask = task
+        def guard = tasks.register("check${task.name.capitalize()}RustLib") {
+            doLast {
+                def apks = packageTask.outputs.files.asFileTree.matching { include '**/*.apk' }.files
+                if (apks.isEmpty()) {
+                    throw new GradleException("${packageTask.name}: no APK found to check")
+                }
+                if (!rustLib.exists()) {
+                    throw new GradleException("${rustLib} does not exist")
+                }
+                def want = elfBuildId(rustLib.bytes)
+                if (want == null) {
+                    throw new GradleException("${rustLib} has no GNU build-id (link arg missing?)")
+                }
+                // Extract under build/, never /tmp.
+                def tmp = file("$buildDir/tmp/rustLibGuard")
+                tmp.deleteDir()
+                tmp.mkdirs()
+                apks.each { apk ->
+                    def zip = new java.util.zip.ZipFile(apk)
+                    try {
+                        def entry = zip.getEntry('lib/arm64-v8a/libwgserv.so')
+                        if (entry == null) {
+                            throw new GradleException("${apk.name} is missing lib/arm64-v8a/libwgserv.so")
+                        }
+                        def out = new File(tmp, "${apk.name}.libwgserv.so")
+                        out.withOutputStream { os -> zip.getInputStream(entry).withCloseable { it.transferTo(os) } }
+                        def got = elfBuildId(out.bytes)
+                        if (got != want) {
+                            throw new GradleException(
+                                "${apk.name} ships a STALE libwgserv.so: APK build-id ${got}, " +
+                                "freshly built ${want}")
+                        }
+                        logger.lifecycle("${apk.name}: libwgserv.so build-id ${got} matches the fresh build")
+                    } finally {
+                        zip.close()
+                    }
+                }
+            }
+        }
+        task.finalizedBy guard
+    }
+}

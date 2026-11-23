@@ -1,0 +1,11 @@
+#!/bin/sh
+# Jafnify postrm. Purge removes what Jafnify wrote outside the package at
+# pairing time: the tunnel config (it holds the private key) and the per-user
+# polkit rule. A plain remove keeps them, like any other configuration.
+set -e
+case "$1" in
+    purge)
+        rm -f /etc/wireguard/jafn0.conf /etc/polkit-1/rules.d/49-jafnify.rules
+        ;;
+esac
+exit 0

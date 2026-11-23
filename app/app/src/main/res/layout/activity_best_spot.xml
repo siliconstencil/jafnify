@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/jafnify_spacing_md">
+
+    <include
+        layout="@layout/header_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/jafnify_spacing_xl">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_sm"
+                android:text="@string/best_spot_hint"
+                android:textColor="@color/jafnify_muted"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <LinearLayout
+                android:id="@+id/spotActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_md"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/spotStart"
+                    style="@style/JafnifyPrimaryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/btn_spot_start" />
+
+                <Button
+                    android:id="@+id/spotStop"
+                    style="@style/JafnifyTextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/btn_spot_stop" />
+
+                <Button
+                    android:id="@+id/spotMark"
+                    style="@style/JafnifyTextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/btn_spot_mark" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/spotLive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_lg"
+                android:textSize="@dimen/jafnify_type_body"
+                android:textIsSelectable="true" />
+
+            <TextView
+                android:id="@+id/spotList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_md"
+                android:lineSpacingExtra="@dimen/jafnify_spacing_xs"
+                android:textSize="@dimen/jafnify_type_body"
+                android:textIsSelectable="true" />
+
+            <TextView
+                android:id="@+id/spotVerdict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_md"
+                android:textSize="@dimen/jafnify_type_body"
+                android:textStyle="bold"
+                android:textIsSelectable="true" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

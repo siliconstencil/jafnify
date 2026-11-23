@@ -1,0 +1,24 @@
+#!/bin/sh
+# Jafnify prerm. On remove (not on upgrade) nothing of Jafnify may keep the
+# host's traffic: running trays get SIGTERM (they say goodbye to the phone and
+# restore normal routing), then the helper takes the tunnel down. A crashed
+# tray leaves jafn0 and its rules; this is the last chance to remove them
+# while the helper still exists.
+set -e
+case "$1" in
+    remove|deconfigure)
+        pkill -TERM -x jafnify 2>/dev/null || true
+        i=0
+        while [ "$i" -lt 10 ] && pgrep -x jafnify >/dev/null 2>&1; do
+            sleep 0.5
+            i=$((i + 1))
+        done
+        if [ -x /usr/libexec/jafnify/jafnify-helper ]; then
+            /usr/libexec/jafnify/jafnify-helper down >/dev/null 2>&1 || true
+        fi
+        if ip link show jafn0 >/dev/null 2>&1 && command -v wg-quick >/dev/null 2>&1; then
+            wg-quick down jafn0 >/dev/null 2>&1 || true
+        fi
+        ;;
+esac
+exit 0

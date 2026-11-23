@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/jafnify_spacing_md">
+
+    <include
+        layout="@layout/header_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:id="@+id/diagScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:descendantFocusability="beforeDescendants"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/jafnify_spacing_xl">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/details_title"
+                android:textSize="@dimen/jafnify_type_caption"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="start"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_lg"
+                android:gravity="start"
+                android:text="@string/history_title"
+                android:textSize="@dimen/jafnify_type_caption"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="start"
+                android:text="@string/history_empty"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/jafnify_type_caption" />
+
+            <LinearLayout
+                android:id="@+id/diagActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_sm"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bCopyLog"
+                    style="@style/JafnifyTextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/copy_log" />
+
+                <Button
+                    android:id="@+id/bShareLog"
+                    style="@style/JafnifyTextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/share_log" />
+
+                <Button
+                    android:id="@+id/bSaveDiag"
+                    style="@style/JafnifyTextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:text="@string/save_diag" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_lg"
+                android:gravity="start"
+                android:text="@string/log_title"
+                android:textSize="@dimen/jafnify_type_caption"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="start"
+                android:text="@string/log_idle"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/jafnify_type_caption" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

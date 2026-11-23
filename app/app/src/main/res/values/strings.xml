@@ -1,0 +1,194 @@
+<resources>
+    <string name="app_name">Jafnify</string>
+    <string name="wordmark">Jafnify</string>
+    <string name="back">Back</string>
+
+    <!-- Sharer screen -->
+    <string name="btn_share">Share internet</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_pair_new">Pair new device</string>
+    <string name="btn_forget">Forget device</string>
+    <string name="details_show">Show details</string>
+    <string name="details_hide">Hide details</string>
+    <!-- Overflow and the four plain Activities behind it -->
+    <string name="more_options">More options</string>
+    <string name="menu_devices">Devices</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_statistics">Statistics</string>
+    <string name="menu_best_spot">Best spot</string>
+    <string name="menu_device_panel">Device panel</string>
+    <string name="menu_this_phone">This phone</string>
+    <string name="menu_diagnostics">Diagnostics</string>
+    <string name="menu_about">About</string>
+    <string name="statistics_title">Statistics</string>
+    <string name="best_spot_title">Best spot</string>
+    <string name="device_panel_title">Device panel</string>
+    <string name="best_spot_hint">Shows the signal and the delay every second, so you can compare where the phone sits. The samples stay in this screen and nothing is sent.</string>
+    <string name="btn_spot_start">Start</string>
+    <string name="btn_spot_stop">Stop</string>
+    <string name="btn_spot_mark">This spot</string>
+    <string name="panel_battery_help">Battery help</string>
+    <string name="statistics_hint">Totals and speeds of what Jafnify shared. Stays on this device.</string>
+    <string name="statistics_today">Today</string>
+    <string name="statistics_week">7 days</string>
+    <string name="statistics_month">30 days</string>
+    <string name="permission_network_title">Phone network details</string>
+    <string name="permission_network_message">Jafnify needs the phone\'s network permission to see which network generation you are on and how often it changes. Android calls this permission \"make and manage phone calls\"; Jafnify never makes or reads calls. Nothing extra is collected.</string>
+    <string name="permission_network_continue">Continue</string>
+    <string name="permission_network_denied">Without the permission Jafnify cannot see the network generation. The switch stays off.</string>
+    <string name="permission_network_settings">The permission is blocked. Turn it on in the app\'s system settings, then use the switch again.</string>
+    <string name="permission_network_revoked">The permission was taken away. The switch stays off.</string>
+    <string name="permission_network_unsupported">This phone does not report the network generation.</string>
+    <string name="permission_network_open_settings">Open settings</string>
+    <string name="permission_network_no_settings">The system settings page is not available on this phone.</string>
+    <string name="cancel">Cancel</string>
+    <string name="devices_title">Devices</string>
+    <string name="settings_title">Settings</string>
+    <string name="home_layout_title">Home layout</string>
+    <string name="home_layout_action">Home layout</string>
+    <string name="home_layout_hint">Pick the grid and which tile goes in each slot. Changes apply at once.</string>
+    <string name="home_layout_grid">Tiles</string>
+    <string name="home_layout_wide">Wide tile</string>
+    <string name="home_layout_wide_top">Top</string>
+    <string name="home_layout_wide_bottom">Bottom</string>
+    <string name="home_layout_slot">Slot %1$d</string>
+    <string name="home_layout_slot_wide">Slot %1$d - wide</string>
+    <string name="home_layout_up">Up</string>
+    <string name="home_layout_down">Down</string>
+    <string name="home_layout_done">Done</string>
+    <string name="statistics_network_block">\n%1$s</string>
+    <string name="diagnostics_title">Diagnostics</string>
+    <string name="about_title">About</string>
+    <string name="paired_device_name">Paired device: %1$s</string>
+    <string name="paired_none">No device paired</string>
+    <string name="details_title">Details</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_version_unknown">Version unknown</string>
+    <string name="about_licence">Jafnify is free, open-source software provided \"as is\", without warranty of any kind, under the MIT License.</string>
+    <string name="third_party_notices_title">Third-party notices</string>
+    <string name="donate_action">Support Jafnify</string>
+    <string name="donate_url" translatable="false"></string>
+    <!-- Debug probe (debuggable builds only; long-press the title) -->
+    <string name="probe_title">Discovery probe</string>
+    <string name="probe_intro">On the laptop run: jafnify probe --code %1$s\nListening on the hotspot interface...</string>
+    <string name="probe_status">%1$s\n\n%2$s</string>
+    <string name="probe_close">Close</string>
+    <string name="probe_no_iface">No usable interface - turn on the hotspot</string>
+    <string name="code_placeholder">- - - -</string>
+    <string name="pair_code_label">Pairing code</string>
+    <string name="btn_new_code">New code</string>
+    <string name="btn_hotspot_settings">Turn on hotspot</string>
+    <string name="intro_unpaired">The laptop uses this phone\'s internet through an encrypted tunnel.</string>
+    <string name="hint_hotspot">Turn on the hotspot and connect the laptop to it.</string>
+    <string name="code_hint">Open Jafnify on the laptop and enter this code.</string>
+
+    <!-- Status line: the core words come from Native.sharerStatus; only the
+         platform-only start and setup recoveries live here. -->
+    <string name="status_starting">Starting...</string>
+    <string name="status_no_network_setup">No network. Turn off airplane mode and turn on the hotspot.</string>
+    <string name="notif_rationale_title">Status notifications</string>
+    <string name="notif_rationale_message">Jafnify shows the sharing status and a Stop action in a notification. Allow notifications to see and stop sharing from the notification.</string>
+    <string name="notif_continue">Continue</string>
+    <string name="notif_not_now">Not now</string>
+    <string name="notif_off_note">Status notifications are off.</string>
+    <string name="notif_open_settings">Open settings</string>
+    <string name="elapsed_connected">Connected for %1$s</string>
+    <string name="last_connected">Last connected: %1$s, %2$s</string>
+    <string name="last_connected_unknown">Last connected: %1$s</string>
+
+    <!-- Errors: what happened and what to do -->
+    <string name="err_port_busy">Port in use - close the other VPN app and try again</string>
+    <string name="err_no_network">No network - turn on the hotspot and connect the laptop to it</string>
+    <string name="err_generic">Could not start sharing - see Details</string>
+
+    <!-- Forget and pair new -->
+    <string name="forget_title">Forget device?</string>
+    <string name="forget_message">This device will be forgotten. The other device keeps trying to connect until it forgets this one too.</string>
+    <string name="forget_confirm">Forget</string>
+    <string name="forget_cancel">Cancel</string>
+    <string name="pair_new_title">Pair new device?</string>
+    <string name="pair_new_message">The new pairing replaces %1$s.</string>
+    <string name="pair_new_none_message">Pair this phone with a laptop? Only one device can be paired at a time.</string>
+    <string name="pair_new_confirm">Pair new device</string>
+
+    <!-- Details view -->
+    <string name="details_status">Status: %1$s</string>
+    <string name="details_none">none</string>
+    <string name="details_section_link">Connection</string>
+    <string name="details_section_phone">Phone</string>
+    <string name="details_section_session">This session</string>
+    <string name="details_label_handshake">Last handshake</string>
+    <string name="details_label_status">Status</string>
+    <string name="details_label_peer_key">Peer key</string>
+    <string name="details_label_last_error">Last error</string>
+    <string name="no_current_session">No current session</string>
+    <string name="history_title">History</string>
+    <string name="history_empty">No sessions yet</string>
+    <string name="copy_log">Copy log</string>
+    <string name="share_log">Share log</string>
+    <string name="save_diag">Save diagnostics</string>
+    <string name="save_diag_title">Save diagnostics</string>
+    <string name="save_diag_failed">Could not save diagnostics - try again</string>
+    <string name="start_on_open">Start sharing automatically when Jafnify opens</string>
+    <string name="start_on_open_help">Starts sharing when you open Jafnify and a device is paired.</string>
+    <string name="nickname_label">This device name</string>
+    <string name="nickname_hint">Name for this device</string>
+    <string name="nickname_help">Only shown on this phone.</string>
+    <string name="budget_notification_title">Mobile data allowance</string>
+    <string name="budget_allowance_hint">Allowance (GB)</string>
+    <string name="budget_reset_hint">Reset day (1-31)</string>
+    <string name="budget_save">Save allowance</string>
+    <string name="budget_invalid">Enter an allowance from 0 to 100000 GB and a reset day from 1 to 31.</string>
+    <string name="keep_running_title">Keep Jafnify running</string>
+    <string name="keep_unused_label">Unused app</string>
+    <string name="keep_unused_ok">Android will not remove Jafnify\'s permissions when unused.</string>
+    <string name="keep_unused_can_revoke">Android may remove Jafnify\'s permissions after months unused.</string>
+    <string name="keep_battery_label">Battery</string>
+    <string name="keep_battery_ok">Unrestricted</string>
+    <string name="keep_battery_optimised">Optimised - can stop long sessions</string>
+    <string name="keep_data_saver_label">Data saver</string>
+    <string name="keep_data_ok">Background data allowed</string>
+    <string name="keep_data_blocked">Data saver can block sharing in the background</string>
+    <string name="keep_open">Open</string>
+    <string name="battery_shown_on_main">Shown on the main screen.</string>
+    <string name="battery_unrestricted">Unrestricted</string>
+    <string name="battery_optimised">Optimised</string>
+    <string name="battery_settings_missing">The system battery screen is not available on this device.</string>
+    <!-- One short sentence while sharing on battery without the Doze
+         exemption. The sentence itself is the tap target. -->
+    <string name="battery_hint_note">Battery optimisation is on: Android may pause sharing while unplugged.</string>
+    <string name="battery_hint_dismiss">Dismiss</string>
+    <string name="settings_section_sharing">Sharing</string>
+    <string name="settings_section_appearance">Appearance</string>
+    <string name="settings_sharing_hint">Choose when Jafnify starts a session.</string>
+    <string name="theme_system">System</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
+    <string name="log_copied">Log copied</string>
+    <string name="share_log_title">Share log</string>
+    <string name="log_title">Log</string>
+    <string name="log_idle">[Idle]</string>
+    <string name="log_forgotten">Forgot paired device</string>
+    <string name="log_error">Error: %1$s</string>
+    <string name="log_error_unknown">unknown</string>
+
+    <!-- Sharer foreground service -->
+    <string name="sharer_service_desc">Jafnify internet sharing service</string>
+    <string name="sharer_channel_name">Internet sharing</string>
+    <string name="sharer_channel_desc">Shown while Jafnify is sharing this phone\'s internet connection</string>
+    <string name="sharer_notif_title">Jafnify - sharing</string>
+    <string name="sharer_notif_starting">Starting...</string>
+    <string name="sharer_notif_starting_reason">Starting (started by: %1$s)...</string>
+    <string name="sharer_waiting_hotspot">Hotspot is off. Turn it on to keep sharing.</string>
+    <string name="sharer_start_hotspot">Hotspot is off. Turn on the hotspot to share.</string>
+    <string name="sharer_notif_connected">%1$s - Connected</string>
+    <string name="sharer_notif_stop">Stop</string>
+    <string name="hotspot_off_channel_name">Hotspot off</string>
+    <string name="hotspot_off_channel_desc">Tells you when the hotspot turned off while Jafnify is sharing</string>
+    <string name="hotspot_off_notification_title">Jafnify - hotspot off</string>
+    <string name="terms_title">Before you start</string>
+    <string name="terms_accept">I understand</string>
+    <string name="terms_decline">Not now</string>
+    <string name="terms_body">Use at your own risk. Jafnify is free, open-source software provided \"as is\", without warranty of any kind, as stated in the MIT License. The authors and contributors are not liable for any damage, data loss, security incident, service interruption, charges, or legal consequences that result from using it.\n\nYou are responsible for how you use it. Sharing a phone\'s connection may be limited or forbidden by your mobile plan\'s terms. Check them before use; any extra charges or account actions are your responsibility.\n\nWhat it protects. Jafnify encrypts the link between your computer and your phone.\n\nSecurity. Jafnify opens network ports on your devices while it runs. Only pair devices you own, on networks you trust. Keep both apps up to date. Report security problems privately as described in SECURITY.md.\n\nDo not use Jafnify for anything that is illegal where you are.</string>
+</resources>

@@ -1,0 +1,37 @@
+// Release signing for the Android APK.
+//
+// Keystore path, alias and passwords come ONLY from the environment at build
+// time (JAFNIFY_KEYSTORE, JAFNIFY_KEYSTORE_PASSWORD, JAFNIFY_KEY_ALIAS,
+// JAFNIFY_KEY_PASSWORD). Nothing is written to disk and nothing is printed.
+// Gradle fails the build when a variable is missing, so a release artifact can
+// never be built unsigned by accident.
+
+def env = System.getenv()
+['JAFNIFY_KEYSTORE', 'JAFNIFY_KEYSTORE_PASSWORD',
+ 'JAFNIFY_KEY_ALIAS', 'JAFNIFY_KEY_PASSWORD'].each { name ->
+    if (!env[name]) {
+        throw new GradleException("missing environment variable ${name}")
+    }
+}
+
+allprojects { project ->
+    project.afterEvaluate {
+        if (project.plugins.hasPlugin('com.android.application')) {
+            project.android {
+                signingConfigs {
+                    release {
+                        storeFile project.file(env['JAFNIFY_KEYSTORE'])
+                        storePassword env['JAFNIFY_KEYSTORE_PASSWORD']
+                        keyAlias env['JAFNIFY_KEY_ALIAS']
+                        keyPassword env['JAFNIFY_KEY_PASSWORD']
+                    }
+                }
+                buildTypes {
+                    release {
+                        signingConfig signingConfigs.release
+                    }
+                }
+            }
+        }
+    }
+}

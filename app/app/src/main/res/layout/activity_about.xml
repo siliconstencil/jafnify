@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/jafnify_spacing_md">
+
+    <include
+        layout="@layout/header_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/jafnify_spacing_xl">
+
+            <TextView
+                android:id="@+id/tVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:minHeight="@dimen/jafnify_line_height_body"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <TextView
+                android:id="@+id/tLicence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_sm"
+                android:gravity="start"
+                android:text="@string/about_licence"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/jafnify_type_body" />
+
+            <Button
+                android:id="@+id/bNotices"
+                style="@style/JafnifyTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_lg"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/bDonate"
+                style="@style/JafnifyTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/jafnify_spacing_lg"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:text="@string/donate_action" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

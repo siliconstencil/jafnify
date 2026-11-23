@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/jafnify_spacing_md">
+
+    <include
+        layout="@layout/header_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tPairedName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:minHeight="@dimen/jafnify_line_height_body_large"
+        android:text="@string/paired_none"
+        android:textSize="@dimen/jafnify_type_body_large" />
+
+    <Button
+        android:id="@+id/bPairNew"
+        style="@style/JafnifyTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/jafnify_spacing_lg"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:text="@string/btn_pair_new" />
+
+    <Button
+        android:id="@+id/bForget"
+        style="@style/JafnifyTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/jafnify_spacing_sm"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:text="@string/btn_forget" />
+
+    <TextView
+        android:id="@+id/tForgetError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/jafnify_spacing_sm"
+        android:gravity="start"
+        android:textColor="@color/jafnify_err"
+        android:textSize="@dimen/jafnify_type_body"
+        android:visibility="gone" />
+</LinearLayout>

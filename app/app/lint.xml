@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- design/tokens.toml generates this file and every platform shares the
+     scale: Android layouts use a subset, Linux reads the line-height and
+     elevation values, and the token tests assert the whole scale. Do not
+     edit the generated file; ignore only it for the unused check. -->
+<lint>
+    <issue id="UnusedResources">
+        <ignore path="src/main/res/values/dimens.xml" />
+    </issue>
+</lint>

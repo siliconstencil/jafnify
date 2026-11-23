@@ -1,0 +1,42 @@
+[package]
+name = "wgserv"
+version = "0.1.4"
+edition = "2021"
+license = "MIT"
+
+[lib]
+name="wgserv"
+# rlib lets the host-runnable sharer harness (src/bin) link the same code the
+# Android cdylib ships.
+crate-type=["cdylib", "rlib"]
+
+[dependencies]
+anyhow = "1.0.74"
+base64 = "0.21"
+jafnify-core = { path = "../../jafnify-core" }
+jni = "0.21.1"
+libwgslirpy = { path = "../../libwgslirpy-fork" }
+rand = "0.8"
+serde = { version = "1.0.183", features = ["derive"] }
+tokio = { version = "1.31.0", features = ["rt", "sync", "macros"] }
+tracing = {version="0.1.37", features=["release_max_level_debug"]}
+tracing-subscriber = { version = "0.3.17", default-features = false, features = ["std", "registry"] }
+
+# stderr logging for the host sharer harness only (never built for Android).
+[target.'cfg(not(target_os = "android"))'.dependencies]
+tracing-subscriber = { version = "0.3.17", default-features = false, features = ["std", "registry", "fmt"] }
+
+[dev-dependencies]
+tempfile = "3"
+hmac = "0.12"
+sha2 = "0.10"
+
+[profile.release]
+opt-level = "s"
+debug = 1
+rpath = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+incremental = false
+panic = 'abort'
